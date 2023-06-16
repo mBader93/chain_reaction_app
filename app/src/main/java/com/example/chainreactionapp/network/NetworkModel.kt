@@ -1,5 +1,6 @@
 package com.example.chainreactionapp.network
 
+import com.example.chainreactionapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,7 +37,7 @@ object NetworkModel {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-//            .baseUrl(BuildConfig.APP_API_BASE)
+            .baseUrl(BuildConfig.APP_API_BASE)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

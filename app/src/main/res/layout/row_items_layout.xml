@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.chainreactionapp.feature.domain.model.ItemModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/row_item_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <ImageView
+                android:id="@+id/row_item_image_image_view"
+                loadImageUrl="@{item.imageUrlsThumbnails[0]}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/row_item_name_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                android:text="@string/name_title"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row_item_image_image_view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/row_item_name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/row_item_name_title_text_view"
+                app:layout_constraintStart_toEndOf="@+id/row_item_name_title_text_view"
+                app:layout_constraintTop_toTopOf="@+id/row_item_name_title_text_view"
+                tools:text="test" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/row_item_price_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="8dp"
+                android:text="@string/price_title"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row_item_name_title_text_view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/row_item_price_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{item.price}"
+                app:layout_constraintBottom_toBottomOf="@+id/row_item_price_title_text_view"
+                app:layout_constraintStart_toEndOf="@+id/row_item_price_title_text_view"
+                app:layout_constraintTop_toTopOf="@+id/row_item_price_title_text_view"
+                tools:text="test" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
