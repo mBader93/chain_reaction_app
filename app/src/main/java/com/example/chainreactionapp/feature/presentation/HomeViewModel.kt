@@ -4,18 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.chainreactionapp.feature.domain.model.HomeModel
 import com.example.chainreactionapp.feature.domain.usecase.GetHomeDataUseCase
+import com.example.chainreactionapp.feature.domain.usecase.UpdateLocalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getHomeDataUseCase: GetHomeDataUseCase
+    private val getHomeDataUseCase: GetHomeDataUseCase,
+    private val updateLocalUseCase: UpdateLocalUseCase
 ) : ViewModel() {
 
     private val _loadingStateFLow = MutableStateFlow<Boolean>(true)
@@ -29,6 +30,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getHomeData()
+        updateLocalData()
     }
 
     private fun getHomeData() {
@@ -43,5 +45,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun updateLocalData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                updateLocalUseCase()
+            } catch (e: Exception) {
+                e.message?.let { _onErrorStateFlow.value = it }
+            }
+        }
+    }
 
 }
